@@ -1,5 +1,6 @@
 ﻿namespace MockCanvas.Questions;
-public class ChoiceQuestion : Question {
+public class ChoiceQuestion : Question
+{
 
 }
 
