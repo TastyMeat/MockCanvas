@@ -1,7 +1,7 @@
 public class AcademicCourseParticipant(CanvasUser canvasUser, AcademicCourseParticipant.RoleTypes role) {
     public enum RoleTypes {
         Teacher,
-        TA,
+        TeachingAssistant,
         PeerReview,
         Student,
     }
