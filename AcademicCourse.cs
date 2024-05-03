@@ -4,7 +4,7 @@ public class AcademicCourse {
 
     public string Semester { get; private set; } = "";
 
-    public List<IAssessment> Assessments { get; private set; } = [];
+    public List<Coursework> Assessments { get; private set; } = [];
 
 
 }
