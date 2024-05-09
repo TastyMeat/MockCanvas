@@ -35,23 +35,23 @@ public class AcademicCourse(string name, string semester) {
 
     #region Courseworks
     public void AssignCoursework(Coursework coursework) {
-        foreach (CanvasUser user in Users.Where(user => Roles[user.Id] == RoleTypes.Student)) {
-            switch (coursework) {
-                case Question question: 
-                    user.Mock_AnswerQuestion(question); 
-                    break;
-            }
-        }
+        foreach (CanvasUser user in Users.Where(user => Roles[user.Id] == RoleTypes.Student))
+            user.OnCourseworkAssigned(this, coursework);
     }
 
-    public void SubmitCoursework(CanvasUser user, Coursework coursework) {
+    public void SubmitCoursework(CanvasUser user, int courseworkId, List<string> submission) {
         var userSubmissions = Submissions[user.Id];
 
-        //if (!userSubmissions.TryAdd(coursework.Id, coursework)) userSubmissions[coursework.Id] = coursework;
+        if (!userSubmissions.TryAdd(courseworkId, submission)) userSubmissions[courseworkId] = submission;
     }
 
     public void GetGrade(CanvasUser user) {
         var userSubmissions = Submissions[user.Id];
+
+
+        userSubmissions.ToList().ForEach(keyValuePair => {
+            Console.WriteLine(string.Join(", ", keyValuePair.Value));
+        });
 
         //(float pointsEarned, float earnablePoints) = userSubmissions.Values.Aggregate<Coursework, (float pointsEarned, float earnablePoints)>((0, 0), (sum,coursework) => {
 
@@ -61,4 +61,8 @@ public class AcademicCourse(string name, string semester) {
         //float grade = pointsEarned / earnablePoints;
     }
     #endregion
+}
+
+public interface ICourseListener {
+    void OnCourseworkAssigned(AcademicCourse course, Coursework coursework);
 }

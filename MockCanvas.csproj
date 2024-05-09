@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Questions\Questions\**" />
-    <EmbeddedResource Remove="Questions\Questions\**" />
-    <None Remove="Questions\Questions\**" />
+    <Compile Remove="Quiz\Questions\**" />
+    <EmbeddedResource Remove="Quiz\Questions\**" />
+    <None Remove="Quiz\Questions\**" />
   </ItemGroup>
 
   <ItemGroup>

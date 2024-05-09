@@ -1,45 +1,53 @@
 using MockCanvas.Questions;
 using System.Collections.ObjectModel;
 
-public class CanvasUser(string name) {
+public class CanvasUser(string name) : ICourseListener {
 
-	public readonly int Id = _idCounter++;
-	private static int _idCounter = 0;
+    public readonly int Id = _idCounter++;
+    private static int _idCounter = 0;
 
-	public string Name { get; private set; } = name;
-	public string Contact { get; private set; } = "";
-	public string Biography { get; private set; } = "";
+    public string Name { get; private set; } = name;
+    public string Contact { get; private set; } = "";
+    public string Biography { get; private set; } = "";
 
-	private List<AcademicCourse> Enrollments { get; set; } = [];
+    private List<AcademicCourse> Enrollments { get; set; } = [];
 
-	public ReadOnlyCollection<Uri> Links => new(_links);
-	private readonly List<Uri> _links = [];
+    public ReadOnlyCollection<Uri> Links => new(_links);
+    private readonly List<Uri> _links = [];
 
-	
-	public void EnrollIn(AcademicCourse course) {
-		course.Enroll(this);
-		if(!Enrollments.Contains(course)) Enrollments.Add(course);
-	}
+
+    public void EnrollIn(AcademicCourse course) {
+        course.Enroll(this);
+        if (!Enrollments.Contains(course)) Enrollments.Add(course);
+    }
 
     private Coursework[] GetTasks() {
-		return [];
-	}
+        return [];
+    }
 
-	public List<string> Mock_AnswerQuestion(Question question) {
-		return question switch {
-			ChoiceQuestion => [GetRandomChoiceAnswer().ToString()],
-			TrueFalseQuestion => [GetRandomTrueFalseAnswer().ToString()],
+    public void OnCourseworkAssigned(AcademicCourse course, Coursework coursework) {
+        switch (coursework) {
+            case Quiz quiz:
+                course.SubmitCoursework(
+                    this,
+                    coursework.Id,
+                    quiz.Questions
+                        .Aggregate<Question, List<string>>([], (submission, question) =>
+                            [.. submission, .. question.GetRandomAnswer()])
+                );
+                break;
+        }
+    }
 
-			QuestionSet questionSet => new Func<List<string>>(() => {
-                foreach (Question subQuestion in questionSet.Questions)
-                    Mock_AnswerQuestion(subQuestion);
-                return []; 
-			})(),
+    //public List<string> Mock_AnswerQuestion(Question question) => question switch {
+    //    ChoiceQuestion => [GetRandomChoiceAnswer().ToString()],
+    //    TrueFalseQuestion => [GetRandomTrueFalseAnswer().ToString()],
+    //    QuestionSet questionSet => questionSet.Questions
+    //        .Aggregate<Question, List<string>>(
+    //            [],
+    //            (answers, subQuestion) => [.. answers, .. Mock_AnswerQuestion(subQuestion)]
+    //        ),
+    //    _ => [],
+    //};
 
-			_ => [],
-		};
-	}
-
-	private static int GetRandomChoiceAnswer() => new Random().Next(1, 6);
-	private static bool GetRandomTrueFalseAnswer()=> new Random().Next(2) == 1;
 }

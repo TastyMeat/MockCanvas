@@ -10,16 +10,17 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAACAEAAAAAACAIEAAAAQAAgAAAAAAAAAAAAGAAAA=</HashCode>
+      <HashCode>AAAgACAEAAAAAACAIEEAAAQAAgAAAAAAAAAAAACAEAA=</HashCode>
       <FileName>AcademicCourse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CanvasUser">
     <Position X="1.5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACACAQAAAAAAAAAADAAAAAQAgAAAACAACAAAAAAAAEA=</HashCode>
+      <HashCode>ACACAQAAAAAAAAAADAAAAAQAgAAAACAACAAAAACAAEA=</HashCode>
       <FileName>CanvasUser.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

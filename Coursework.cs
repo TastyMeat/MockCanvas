@@ -1,5 +1,5 @@
-public abstract class Coursework(float earnablePoint = 100) {
-
+public abstract class Coursework(string name, float earnablePoint = 100) {
+    public readonly string name = name;
     public readonly int Id = _idCounter++;
     private static int _idCounter = 0;
 
@@ -10,3 +10,4 @@ public abstract class Coursework(float earnablePoint = 100) {
     public DateTime? LockAt { get; protected set; }
 
 }
+
