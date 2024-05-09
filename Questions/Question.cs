@@ -1,6 +1,5 @@
 ﻿namespace MockCanvas.Questions;
-public abstract class Question
-{
+public abstract class Question : Coursework {
 
 }
 
