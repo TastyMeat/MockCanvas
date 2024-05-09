@@ -8,7 +8,6 @@ public class Quiz(string name, List<Question> questions) : Coursework(name, ques
 
         return Questions.Aggregate<Question, float>(0, (pointEarned, question) => {
             pointEarned += question.VerifyAnswer(submissionCopy);
-            submissionCopy.RemoveAt(0);
             
             return pointEarned;
         }) / EarnablePoint;

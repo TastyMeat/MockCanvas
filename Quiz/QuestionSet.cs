@@ -8,8 +8,6 @@ public class QuestionSet(string title, List<Question> questions) : Question(titl
             (answers, subQuestion) => [.. answers, .. subQuestion.GetRandomAnswer()]
         );
 
-    public override float VerifyAnswer(List<string> submission) {
-        throw new NotImplementedException();
-    }
+    public override float VerifyAnswer(List<string> submission) => Questions.Sum(question => question.VerifyAnswer(submission));
 }
 
