@@ -26,28 +26,15 @@ public class CanvasUser(string name) : ICourseListener {
     }
 
     public void OnCourseworkAssigned(AcademicCourse course, Coursework coursework) {
-        switch (coursework) {
-            case Quiz quiz:
-                course.SubmitCoursework(
-                    this,
-                    coursework.Id,
-                    quiz.Questions
-                        .Aggregate<Question, List<string>>([], (submission, question) =>
-                            [.. submission, .. question.GetRandomAnswer()])
-                );
-                break;
-        }
+        List<string> submission = coursework switch {
+            Quiz quiz => Mock_AnswerQuiz(quiz),
+            _ => throw new NotImplementedException()
+        };
+
+        course.SubmitCoursework(this, coursework.Id, submission);
     }
 
-    //public List<string> Mock_AnswerQuestion(Question question) => question switch {
-    //    ChoiceQuestion => [GetRandomChoiceAnswer().ToString()],
-    //    TrueFalseQuestion => [GetRandomTrueFalseAnswer().ToString()],
-    //    QuestionSet questionSet => questionSet.Questions
-    //        .Aggregate<Question, List<string>>(
-    //            [],
-    //            (answers, subQuestion) => [.. answers, .. Mock_AnswerQuestion(subQuestion)]
-    //        ),
-    //    _ => [],
-    //};
-
+    private static List<string> Mock_AnswerQuiz(Quiz quiz) =>
+        quiz.Questions.Aggregate<Question, List<string>>([], (submission, question) =>
+                [.. submission, .. question.GetRandomAnswer()]);
 }

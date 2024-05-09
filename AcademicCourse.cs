@@ -35,6 +35,7 @@ public class AcademicCourse(string name, string semester) {
 
     #region Courseworks
     public void AssignCoursework(Coursework coursework) {
+        Courseworks.Add(coursework);
         foreach (CanvasUser user in Users.Where(user => Roles[user.Id] == RoleTypes.Student))
             user.OnCourseworkAssigned(this, coursework);
     }
@@ -50,7 +51,8 @@ public class AcademicCourse(string name, string semester) {
 
 
         userSubmissions.ToList().ForEach(keyValuePair => {
-            Console.WriteLine(string.Join(", ", keyValuePair.Value));
+            float pointEarned = Courseworks.Find(coursework => coursework.Id == keyValuePair.Key)?.GetPointEarned(keyValuePair.Value.AsReadOnly()) ?? 0;
+            Console.WriteLine(pointEarned);
         });
 
         //(float pointsEarned, float earnablePoints) = userSubmissions.Values.Aggregate<Coursework, (float pointsEarned, float earnablePoints)>((0, 0), (sum,coursework) => {
