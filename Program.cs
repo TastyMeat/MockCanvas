@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using MockCanvas.Questions;
+
 CanvasUser lecturer = new("Rogelio");
 CanvasUser[] teachingAssistants = [
    new("Janaki"),
@@ -20,3 +22,10 @@ CanvasUser[] students = [
 
 foreach (CanvasUser student in students) student.EnrollIn(csci152e);
 
+
+QuestionSet quiz1 = new("Quiz 1", [
+    new ChoiceQuestion("Pick a number", 5),
+    new TrueFalseQuestion("Is this a question", true),
+]);
+
+csci152e.AssignCoursework(quiz1);

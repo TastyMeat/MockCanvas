@@ -1,3 +1,4 @@
+using MockCanvas.Questions;
 using System.Collections.ObjectModel;
 
 public class CanvasUser(string name) {
@@ -24,5 +25,21 @@ public class CanvasUser(string name) {
 		return [];
 	}
 
-	
+	public List<string> Mock_AnswerQuestion(Question question) {
+		return question switch {
+			ChoiceQuestion => [GetRandomChoiceAnswer().ToString()],
+			TrueFalseQuestion => [GetRandomTrueFalseAnswer().ToString()],
+
+			QuestionSet questionSet => new Func<List<string>>(() => {
+                foreach (Question subQuestion in questionSet.Questions)
+                    Mock_AnswerQuestion(subQuestion);
+                return []; 
+			})(),
+
+			_ => [],
+		};
+	}
+
+	private static int GetRandomChoiceAnswer() => new Random().Next(1, 6);
+	private static bool GetRandomTrueFalseAnswer()=> new Random().Next(2) == 1;
 }

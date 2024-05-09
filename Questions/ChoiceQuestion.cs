@@ -1,9 +1,10 @@
 ﻿namespace MockCanvas.Questions;
-public class ChoiceQuestion(string title, int answer) : Question {
+public class ChoiceQuestion(string title, int answer) : Question(title) {
 
-    public readonly string Title = title;
-    public readonly int Answer = answer;
+    private readonly int Answer = answer;
 
-
+    public override void AnswerWith(string answer) {
+        throw new NotImplementedException();
+    }
 }
 
