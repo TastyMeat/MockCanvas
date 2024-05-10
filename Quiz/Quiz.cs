@@ -7,7 +7,7 @@ public class Quiz(string name, List<Question> questions) : Coursework(name, ques
         List<string> submissionCopy = new(submission);
 
         return Questions.Aggregate<Question, float>(0, (pointEarned, question) => {
-            pointEarned += question.VerifyAnswer(submissionCopy);
+            pointEarned += question.GetSubmissionPoint(submissionCopy);
             
             return pointEarned;
         }) / EarnablePoint;

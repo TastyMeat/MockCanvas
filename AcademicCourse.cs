@@ -28,6 +28,8 @@ public class AcademicCourse(string name, string semester) {
         Submissions.TryAdd(user.Id, []);
 
         user.EnrollIn(this);
+
+        Console.WriteLine($"Enrolled {user.Name} in {Name} as a {Roles[user.Id]}.");
     }
 
     public void Disenroll(CanvasUser user) => Users.Remove(user);
@@ -36,6 +38,8 @@ public class AcademicCourse(string name, string semester) {
     #region Courseworks
     public void AssignCoursework(Coursework coursework) {
         Courseworks.Add(coursework);
+        Console.WriteLine($"Assigned coursework {coursework.name} in {Name}.");
+
         foreach (CanvasUser user in Users.Where(user => Roles[user.Id] == RoleTypes.Student))
             user.OnCourseworkAssigned(this, coursework);
     }

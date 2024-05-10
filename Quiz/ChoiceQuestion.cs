@@ -8,7 +8,7 @@ public class ChoiceQuestion(string title, int answer, float point = 1) : Questio
 
     private static int GetRandomChoiceAnswer() => new Random().Next(1, 6);
 
-    public override float VerifyAnswer(List<string> submission) {
+    public override float GetSubmissionPoint(List<string> submission) {
         float point = int.TryParse(submission.First(), out int submittedAnswer)
             ? submittedAnswer == Answer
                 ? Point

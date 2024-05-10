@@ -5,6 +5,6 @@ public abstract class Question(string title, float point) {
 
     public abstract List<string> GetRandomAnswer();
 
-    public abstract float VerifyAnswer(List<string> submission);
+    public abstract float GetSubmissionPoint(List<string> submission);
 }
 

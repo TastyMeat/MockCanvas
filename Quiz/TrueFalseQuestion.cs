@@ -7,14 +7,14 @@ public class TrueFalseQuestion(string title, bool answer, int point = 1) : Quest
 
     private static bool GetRandomTrueFalseAnswer() => new Random().Next(2) == 1;
 
-    public override float VerifyAnswer(List<string> submission) {
-        float point = bool.TryParse(submission.First(), out bool submittedAnswer)
+    public override float GetSubmissionPoint(List<string> submissionCopy) {
+        float point = bool.TryParse(submissionCopy.First(), out bool submittedAnswer)
             ? submittedAnswer == answer
                 ? Point
                 : 0
             : 0;
 
-        submission.RemoveAt(0);
+        submissionCopy.RemoveAt(0);
         return point;
     }
 }
