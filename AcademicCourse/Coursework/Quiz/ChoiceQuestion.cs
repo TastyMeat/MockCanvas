@@ -1,6 +1,6 @@
-﻿
-namespace MockCanvas.Questions;
-public class ChoiceQuestion(string title, int answer, float point = 1) : Question(title, point) {
+﻿namespace MockCanvas.Education;
+public class ChoiceQuestion(string title, int answer, float point = 1) : Question(title, point)
+{
 
     private readonly int Answer = answer;
 
@@ -8,7 +8,8 @@ public class ChoiceQuestion(string title, int answer, float point = 1) : Questio
 
     private static int GetRandomChoiceAnswer() => new Random().Next(1, 6);
 
-    public override float GetSubmissionPoint(List<string> submissionCopy, int indent = 0) {
+    public override float GetSubmissionPoint(List<string> submissionCopy, int indent = 0)
+    {
         float pointEarned = int.TryParse(submissionCopy.First(), out int submittedAnswer)
             ? submittedAnswer == Answer
                 ? EarnablePoint

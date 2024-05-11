@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using MockCanvas.Questions;
+using MockCanvas.Education;
+using MockCanvas.User;
 
 CanvasUser lecturer = new("Rogelio");
 CanvasUser[] teachingAssistants = [

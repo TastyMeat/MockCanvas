@@ -1,5 +1,6 @@
-﻿namespace MockCanvas.Questions;
-public abstract class Question(string title, float point) {
+﻿namespace MockCanvas.Education;
+public abstract class Question(string title, float point)
+{
     public readonly string Title = title;
     public readonly float EarnablePoint = point;
 

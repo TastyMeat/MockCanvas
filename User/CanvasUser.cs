@@ -1,6 +1,8 @@
-using MockCanvas;
-using MockCanvas.Questions;
 using System.Collections.ObjectModel;
+
+using MockCanvas.Education;
+
+namespace MockCanvas.User;
 
 public class CanvasUser(string name) : ICourseListener {
 

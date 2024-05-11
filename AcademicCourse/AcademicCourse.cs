@@ -1,4 +1,6 @@
-using MockCanvas.Questions;
+using MockCanvas.User;
+
+namespace MockCanvas.Education;
 
 public class AcademicCourse(string name, string semester) {
 

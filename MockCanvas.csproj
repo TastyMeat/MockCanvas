@@ -8,13 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Quiz\Questions\**" />
-    <EmbeddedResource Remove="Quiz\Questions\**" />
-    <None Remove="Quiz\Questions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Compile Remove="AcademicCourse\Coursework\Quiz\Questions\**" />
+    <EmbeddedResource Remove="AcademicCourse\Coursework\Quiz\Questions\**" />
+    <None Remove="AcademicCourse\Coursework\Quiz\Questions\**" />
   </ItemGroup>
 
 </Project>

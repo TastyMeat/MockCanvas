@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 
+namespace MockCanvas.Education;
+
 public abstract class Coursework(string name, float weight, float earnablePoint = 100) {
     public string Name { get; set; } = name;
     public float Weight { get; set; } = weight;
