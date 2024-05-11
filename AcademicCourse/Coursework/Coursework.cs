@@ -10,9 +10,12 @@ namespace MockCanvas.Education;
 public abstract class Coursework(string name, float weight, float earnablePoint = 100)
 {
     /// <summary>
-    /// gets and set the Name and Weight
+    /// gets and set the Name
     /// </summary>
     public string Name { get; set; } = name;
+     /// <summary>
+    /// gets and set the Weight
+    /// </summary>
     public float Weight { get; set; } = weight;
 
     /// <summary>
@@ -28,11 +31,23 @@ public abstract class Coursework(string name, float weight, float earnablePoint 
     public abstract float GetPointEarned(ReadOnlyCollection<string> submission);
 
     /// <summary>
-    /// gets and sets the date time of the dua at, unlock at, lock at time and the earnable point of the coursework
+    /// gets and sets the earnable point of the coursework
     /// </summary>
     public float EarnablePoint { get; protected set; } = earnablePoint;
+
+    /// <summary>
+    /// gets and sets the due at time
+    /// </summary>
     public DateTime? DueAt { get; protected set; }
+
+    /// <summary>
+    /// gets and sets the unlock at time
+    /// </summary>
     public DateTime? UnlockAt { get; protected set; }
+
+    /// <summary>
+    /// gets and sets the lock at time
+    /// </summary>
     public DateTime? LockAt { get; protected set; }
 
 }

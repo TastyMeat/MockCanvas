@@ -9,7 +9,7 @@ public class ChoiceQuestion(string title, int answer, float point = 1) : Questio
 {
 
     private readonly int Answer = answer;
-
+    
     public override List<string> GetRandomAnswer() => [GetRandomChoiceAnswer().ToString()];
     /// <summary>
     /// Generates a random choice answer.
