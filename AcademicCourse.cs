@@ -15,6 +15,9 @@ public class AcademicCourse(string name, string semester) {
     public Dictionary<int, RoleTypes> Roles { get; private set; } = [];
 
 
+    public CanvasUser? Teacher => _teacher ??= Users.Find(user => user.Id == Roles.First(role => role.Value == RoleTypes.Teacher).Key);
+    private CanvasUser? _teacher;
+
     public List<Coursework> Courseworks { get; private set; } = [];
 
     public Dictionary<int, Dictionary<int, List<string>>> Submissions { get; private set; } = [];
@@ -32,13 +35,22 @@ public class AcademicCourse(string name, string semester) {
         Console.WriteLine($"Enrolled {user.Name} in {Name} as a {Roles[user.Id]}.");
     }
 
-    public void Disenroll(CanvasUser user) => Users.Remove(user);
+    public void Disenroll(CanvasUser user) {
+        if (Roles[user.Id] == RoleTypes.Teacher) _teacher = null;
+        Users.Remove(user);
+    }
     #endregion
 
     #region Courseworks
     public void AssignCoursework(Coursework coursework) {
         Courseworks.Add(coursework);
-        Console.WriteLine($"Assigned coursework {coursework.name} in {Name}.");
+
+        if (Teacher != null)
+            Console.Write($"{Teacher.Name} assigned ");
+        else
+            Console.Write($"Assigned ");
+
+        Console.WriteLine($"coursework {coursework.Name} in {Name}.");
 
         foreach (CanvasUser user in Users.Where(user => Roles[user.Id] == RoleTypes.Student))
             user.OnCourseworkAssigned(this, coursework);
@@ -51,20 +63,19 @@ public class AcademicCourse(string name, string semester) {
     }
 
     public void GetGrade(CanvasUser user) {
+        Console.WriteLine($"Retrieving grades for {user.Name} in {Name}:");
         var userSubmissions = Submissions[user.Id];
 
+        float pointEarned = userSubmissions.Sum(keyValuePair => {
+            Coursework? coursework = Courseworks.Find(coursework => coursework.Id == keyValuePair.Key);
 
-        userSubmissions.ToList().ForEach(keyValuePair => {
-            float pointEarned = Courseworks.Find(coursework => coursework.Id == keyValuePair.Key)?.GetPointEarned(keyValuePair.Value.AsReadOnly()) ?? 0;
-            Console.WriteLine(pointEarned);
+            return coursework?.GetPointEarned(keyValuePair.Value.AsReadOnly()) ?? 0;
         });
 
-        //(float pointsEarned, float earnablePoints) = userSubmissions.Values.Aggregate<Coursework, (float pointsEarned, float earnablePoints)>((0, 0), (sum,coursework) => {
+        float earnablePoint = Courseworks.Select(coursework => coursework.Weight).Sum();
 
-        //    return (sum.pointsEarned + coursework.PointEarned ?? 0, sum.earnablePoints + coursework.EarnablePoint);
-        //});
-
-        //float grade = pointsEarned / earnablePoints;
+        Console.WriteLine($"Current standing: {string.Format("{0:.##}", pointEarned * 100)} / {string.Format("{0:.##}", earnablePoint * 100)} %");
+        Console.WriteLine();
     }
     #endregion
 }

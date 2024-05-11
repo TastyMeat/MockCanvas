@@ -1,3 +1,4 @@
+using MockCanvas;
 using MockCanvas.Questions;
 using System.Collections.ObjectModel;
 
@@ -26,15 +27,22 @@ public class CanvasUser(string name) : ICourseListener {
     }
 
     public void OnCourseworkAssigned(AcademicCourse course, Coursework coursework) {
+        Console.WriteLine($"{Name} received coursework {coursework.Name} from {course.Name}.");
+
+        Console.WriteLine($"{Name} working on coursework {coursework.Name}...");
         List<string> submission = coursework switch {
-            Quiz quiz => Mock_AnswerQuiz(quiz),
+            Quiz quiz => Mock_CompleteQuiz(quiz),
+            Assignment assignment => Mock_CompleteAssignment(assignment),
             _ => throw new NotImplementedException()
         };
 
         course.SubmitCoursework(this, coursework.Id, submission);
+        Console.WriteLine($"{Name} submitted coursework {coursework.Name}.");
     }
 
-    private static List<string> Mock_AnswerQuiz(Quiz quiz) =>
+    private static List<string> Mock_CompleteQuiz(Quiz quiz) =>
         quiz.Questions.Aggregate<Question, List<string>>([], (submission, question) =>
                 [.. submission, .. question.GetRandomAnswer()]);
+
+    private static List<string> Mock_CompleteAssignment(Assignment assignment) => throw new NotImplementedException();
 }

@@ -8,14 +8,16 @@ public class ChoiceQuestion(string title, int answer, float point = 1) : Questio
 
     private static int GetRandomChoiceAnswer() => new Random().Next(1, 6);
 
-    public override float GetSubmissionPoint(List<string> submission) {
-        float point = int.TryParse(submission.First(), out int submittedAnswer)
+    public override float GetSubmissionPoint(List<string> submissionCopy, int indent = 0) {
+        float pointEarned = int.TryParse(submissionCopy.First(), out int submittedAnswer)
             ? submittedAnswer == Answer
-                ? Point
+                ? EarnablePoint
                 : 0
             : 0;
 
-        submission.RemoveAt(0);
-        return point;
+        Console.WriteLine($"{new('\t', indent)}{pointEarned} / {EarnablePoint} > \"{Title}\" | Answered: {submissionCopy.First()}");
+
+        submissionCopy.RemoveAt(0);
+        return pointEarned;
     }
 }

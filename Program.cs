@@ -22,23 +22,26 @@ CanvasUser[] students = [
 
 foreach (CanvasUser student in students) student.EnrollIn(csci152e);
 
+Console.WriteLine();
 
-Quiz quiz1 = new("Quiz 1", [
-    new ChoiceQuestion("Pick a number", 5),
-    new TrueFalseQuestion("Is this a question", true),
+Quiz quiz1 = new("Quiz 1", 0.15f, [
+    new ChoiceQuestion("Pick the number 5: ", 5),
+    new TrueFalseQuestion("Is this a question?", true),
 ]);
 
 csci152e.AssignCoursework(quiz1);
+Console.WriteLine();
 
-Quiz quiz2 = new("Quiz 2", [
-    new ChoiceQuestion("Pick a number", 5),
-    new TrueFalseQuestion("Is this a question", true),
-    new QuestionSet("Set", [
-        new ChoiceQuestion("Pick a number", 5),
-        new TrueFalseQuestion("Is this a question", true),
+Quiz quiz2 = new("Quiz 2", 0.2f, [
+    new ChoiceQuestion("Pick the number 5: ", 5),
+    new TrueFalseQuestion("Is this a question?", true),
+    new QuestionSet("Here's a question set: ", [
+        new ChoiceQuestion("Pick the number 5: ", 5),
+        new TrueFalseQuestion("Is this a question?", true),
     ]),
 ]);
 
 csci152e.AssignCoursework(quiz2);
+Console.WriteLine();
 
 foreach (CanvasUser student in students) csci152e.GetGrade(student);

@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 
-public abstract class Coursework(string name, float earnablePoint = 100) {
-    public readonly string name = name;
+public abstract class Coursework(string name, float weight, float earnablePoint = 100) {
+    public string Name { get; set; } = name;
+    public float Weight { get; set; } = weight;
+
     public readonly int Id = _idCounter++;
     private static int _idCounter = 0;
 
