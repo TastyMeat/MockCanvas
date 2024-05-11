@@ -1,0 +1,6 @@
+@startuml
+class Assignment {
+    + <<override>> GetPointEarned(submission:ReadOnlyCollection<string>) : float
+}
+Coursework <|-- Assignment
+@enduml

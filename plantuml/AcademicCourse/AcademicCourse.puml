@@ -1,0 +1,29 @@
+@startuml
+class AcademicCourse {
+    + Name : string <<get>>
+    + Semester : string <<get>>
+    + Enroll(user:CanvasUser, role:RoleTypes) : void
+    + Disenroll(user:CanvasUser) : void
+    + AssignCoursework(coursework:Coursework) : void
+    + SubmitCoursework(user:CanvasUser, courseworkId:int, submission:List<string>) : void
+    + GetGrade(user:CanvasUser) : void
+}
+interface ICourseListener {
+}
+class "List`1"<T> {
+}
+enum RoleTypes {
+    Teacher,
+    TeachingAssistant,
+    PeerReview,
+    Student,
+}
+class "Dictionary`2"<T1,T2> {
+}
+AcademicCourse o-> "Users<CanvasUser>" "List`1"
+AcademicCourse o-> "Roles<int,RoleTypes>" "Dictionary`2"
+AcademicCourse --> "Teacher" CanvasUser
+AcademicCourse o-> "Courseworks<Coursework>" "List`1"
+AcademicCourse o-> "Submissions<int,Dictionary<int, List<string>>>" "Dictionary`2"
+AcademicCourse +-- RoleTypes
+@enduml

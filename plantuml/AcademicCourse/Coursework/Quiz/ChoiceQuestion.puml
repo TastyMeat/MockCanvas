@@ -1,0 +1,7 @@
+@startuml
+class ChoiceQuestion {
+    + <<override>> GetRandomAnswer() : List<string>
+    + <<override>> GetSubmissionPoint(submissionCopy:List<string>, indent:int) : float
+}
+Question <|-- ChoiceQuestion
+@enduml

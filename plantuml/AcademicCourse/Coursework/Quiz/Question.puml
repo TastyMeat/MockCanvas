@@ -1,0 +1,8 @@
+@startuml
+abstract class Question {
+    + <<readonly>> Title : string
+    + <<readonly>> EarnablePoint : float
+    + {abstract} GetRandomAnswer() : List<string>
+    + {abstract} GetSubmissionPoint(submissionCopy:List<string>, indent:int) : float
+}
+@enduml

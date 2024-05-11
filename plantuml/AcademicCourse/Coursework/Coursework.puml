@@ -1,0 +1,12 @@
+@startuml
+abstract class Coursework {
+    + Name : string <<get>> <<set>>
+    + Weight : float <<get>> <<set>>
+    + <<readonly>> Id : int
+    + {abstract} GetPointEarned(submission:ReadOnlyCollection<string>) : float
+    + EarnablePoint : float <<get>> <<protected set>>
+}
+Coursework --> "DueAt" DateTime
+Coursework --> "UnlockAt" DateTime
+Coursework --> "LockAt" DateTime
+@enduml

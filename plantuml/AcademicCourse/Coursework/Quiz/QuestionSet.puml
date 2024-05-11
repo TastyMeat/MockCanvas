@@ -1,0 +1,10 @@
+@startuml
+class QuestionSet {
+    + <<override>> GetRandomAnswer() : List<string>
+    + <<override>> GetSubmissionPoint(submissionCopy:List<string>, indent:int) : float
+}
+class "List`1"<T> {
+}
+Question <|-- QuestionSet
+QuestionSet o-> "Questions<Question>" "List`1"
+@enduml

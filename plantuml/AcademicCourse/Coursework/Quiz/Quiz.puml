@@ -1,0 +1,9 @@
+@startuml
+class Quiz {
+    + <<override>> GetPointEarned(submission:ReadOnlyCollection<string>) : float
+}
+class "List`1"<T> {
+}
+Coursework <|-- Quiz
+Quiz o-> "Questions<Question>" "List`1"
+@enduml

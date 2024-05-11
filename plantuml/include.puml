@@ -1,0 +1,15 @@
+@startuml
+!include ./Users/zhengweing/Desktop/Current/CSCI152E/MockCanvas/Program.puml
+!include ./User/CanvasUser.puml
+!include ./AcademicCourse/AcademicCourse.puml
+!include ./AcademicCourse/Coursework/Coursework.puml
+!include ./obj/Debug/net8.0/MockCanvas.AssemblyInfo.puml
+!include ./obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.puml
+!include ./obj/Debug/net8.0/MockCanvas.GlobalUsings.g.puml
+!include ./AcademicCourse/Coursework/Quiz/Question.puml
+!include ./AcademicCourse/Coursework/Quiz/TrueFalseQuestion.puml
+!include ./AcademicCourse/Coursework/Quiz/Quiz.puml
+!include ./AcademicCourse/Coursework/Quiz/QuestionSet.puml
+!include ./AcademicCourse/Coursework/Quiz/ChoiceQuestion.puml
+!include ./AcademicCourse/Coursework/Assignment/Assignment.puml
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+class CanvasUser {
+    + <<readonly>> Id : int
+    + Name : string <<get>>
+    + Contact : string <<get>> = ""
+    + Biography : string <<get>> = ""
+    + EnrollIn(course:AcademicCourse) : void
+    + OnCourseworkAssigned(course:AcademicCourse, coursework:Coursework) : void
+}
+class "ReadOnlyCollection`1"<T> {
+}
+ICourseListener <|-- CanvasUser
+CanvasUser --> "Links<Uri>" "ReadOnlyCollection`1"
+@enduml
